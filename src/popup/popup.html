@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bookmark Newsletter</title>
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="popup">
+    <header class="popup__header">
+      <h1>Bookmark Newsletter</h1>
+      <button id="openNewsletter" class="link-btn" title="Open Newsletter tab">Newsletter</button>
+    </header>
+
+    <form id="saveForm" class="save-form">
+      <div class="page-preview" id="pagePreview">
+        <img id="pageFavicon" class="favicon" alt="" hidden />
+        <div class="page-info">
+          <div id="pageTitle" class="page-title">Loading current tab…</div>
+          <div id="pageUrl" class="page-url"></div>
+        </div>
+      </div>
+
+      <label for="note">Note (optional)</label>
+      <textarea id="note" rows="2" placeholder="Why is this worth revisiting?"></textarea>
+
+      <label for="tag">Tag (optional)</label>
+      <input id="tag" type="text" placeholder="e.g. engineering, recipes" />
+
+      <label class="checkbox-row">
+        <input id="withExcerpt" type="checkbox" checked />
+        Grab a page summary automatically
+      </label>
+
+      <button type="submit" id="saveBtn" class="primary-btn">Save this page</button>
+      <p id="saveStatus" class="status" role="status"></p>
+    </form>
+
+    <section class="recent">
+      <div class="recent__header">
+        <h2>Recently saved</h2>
+        <span id="bookmarkCount" class="count"></span>
+      </div>
+      <button id="importChromeBookmarks" class="text-btn import-btn">Import from Chrome bookmarks</button>
+      <p id="importStatus" class="status" role="status"></p>
+      <ul id="recentList" class="recent-list"></ul>
+      <p id="emptyState" class="empty-state" hidden>No bookmarks yet. Save a page to get started.</p>
+    </section>
+
+    <footer class="popup__footer">
+      <button id="openOptions" class="link-btn">Settings</button>
+    </footer>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

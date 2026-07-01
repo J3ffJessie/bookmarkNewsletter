@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bookmark Newsletter</title>
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="newsletter.css" />
+</head>
+<body>
+  <main class="newsletter">
+    <header class="newsletter__header">
+      <h1>Build your newsletter</h1>
+      <button id="openOptions" class="link-btn">Settings</button>
+    </header>
+
+    <section class="layout">
+      <div class="column">
+        <div class="panel">
+          <div class="panel__header">
+            <h2>Select bookmarks</h2>
+            <div class="select-actions">
+              <button id="selectAll" class="text-btn">Select all</button>
+              <button id="selectNone" class="text-btn">Select none</button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <div>
+              <label for="tagFilter">Tag</label>
+              <select id="tagFilter">
+                <option value="">All tags</option>
+              </select>
+            </div>
+            <div>
+              <label for="sinceFilter">Since</label>
+              <input id="sinceFilter" type="date" />
+            </div>
+          </div>
+          <ul id="bookmarkList" class="bookmark-list"></ul>
+          <p id="noBookmarks" class="empty-state" hidden>
+            No bookmarks saved yet. Use the extension popup to save some pages first.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h2>Generate</h2>
+          <button id="generateBtn" class="primary-btn">Generate newsletter</button>
+          <p id="generateStatus" class="status" role="status"></p>
+        </div>
+
+        <div class="panel">
+          <div class="panel__header">
+            <h2>Archive</h2>
+          </div>
+          <ul id="archiveList" class="archive-list"></ul>
+          <p id="noArchive" class="empty-state" hidden>No newsletters generated yet.</p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="panel output-panel">
+          <div class="panel__header">
+            <h2>Preview</h2>
+            <div class="export-actions">
+              <button id="copyBtn" class="text-btn" disabled>Copy</button>
+              <button id="downloadMdBtn" class="text-btn" disabled>Download .md</button>
+              <button id="downloadHtmlBtn" class="text-btn" disabled>Download .html</button>
+              <button id="emailBtn" class="text-btn" disabled>Email</button>
+            </div>
+          </div>
+          <div id="preview" class="preview">
+            <p class="empty-state">Select bookmarks and click "Generate newsletter" to see a preview here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="newsletter.js"></script>
+</body>
+</html>

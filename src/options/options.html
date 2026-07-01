@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bookmark Newsletter Settings</title>
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main class="options">
+    <h1>Settings</h1>
+
+    <section class="card">
+      <h2>Groq API</h2>
+      <p class="hint">
+        Your API key is stored locally on this device only (chrome.storage.local). It is never synced and is sent
+        directly to Groq's API, never anywhere else. Get a key at
+        <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a>.
+      </p>
+      <label for="apiKey">Groq API key</label>
+      <input id="apiKey" type="password" autocomplete="off" placeholder="gsk_..." />
+
+      <label for="model">Model</label>
+      <input id="model" type="text" placeholder="llama-3.3-70b-versatile" />
+      <p class="hint">Defaults to llama-3.3-70b-versatile. Change this if you'd like to use a different available Groq model.</p>
+
+      <button id="saveApiKey" class="primary-btn">Save</button>
+      <p id="apiKeyStatus" class="status" role="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>Newsletter preferences</h2>
+      <p class="hint">These control the prompt sent to Claude when generating a newsletter.</p>
+
+      <label for="tone">Tone</label>
+      <select id="tone">
+        <option value="balanced">Balanced</option>
+        <option value="casual and conversational">Casual / conversational</option>
+        <option value="professional and concise">Professional / concise</option>
+        <option value="playful and enthusiastic">Playful / enthusiastic</option>
+      </select>
+
+      <label for="length">Length</label>
+      <select id="length">
+        <option value="short">Short digest</option>
+        <option value="medium">Medium</option>
+        <option value="long">Long / narrative</option>
+      </select>
+
+      <label for="grouping">Grouping</label>
+      <select id="grouping">
+        <option value="theme">By theme</option>
+        <option value="tag">By tag</option>
+        <option value="date">By date saved</option>
+      </select>
+
+      <label for="detail">Detail level</label>
+      <select id="detail">
+        <option value="detailed">Detailed (multi-sentence write-up + takeaway per bookmark)</option>
+        <option value="brief">Brief (1-2 sentence blurb per bookmark)</option>
+      </select>
+      <p class="hint">
+        Detailed write-ups are only as good as the page excerpt captured when you saved the bookmark. Re-save or
+        re-import older bookmarks if you want richer excerpts to work with.
+      </p>
+
+      <button id="savePreferences" class="primary-btn">Save preferences</button>
+      <p id="preferencesStatus" class="status" role="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>Mobile bookmarks (Chrome Sync)</h2>
+      <p class="hint">
+        Chrome extensions can't run on iOS, but Chrome's built-in bookmark sync can bridge the gap: on your phone,
+        use Chrome's regular star/"Add bookmark" button and save the page into the folder named below. As long as
+        you're signed into the same Google account with Chrome Sync turned on, that bookmark shows up here — click
+        "Import now" (or use the shortcut in the popup) to pull it into your saved list.
+      </p>
+
+      <label for="importFolder">Folder name to watch</label>
+      <input id="importFolder" type="text" placeholder="Newsletter" />
+      <button id="saveImportFolder" class="text-btn">Save folder name</button>
+      <p id="importFolderStatus" class="status" role="status"></p>
+
+      <button id="importNow" class="primary-btn">Import now</button>
+      <p id="importStatus" class="status" role="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>Bookmarks</h2>
+      <p class="hint">Remove all saved bookmarks from this device. This cannot be undone.</p>
+      <button id="clearBookmarks" class="danger-btn">Clear all bookmarks</button>
+      <p id="clearStatus" class="status" role="status"></p>
+    </section>
+  </main>
+  <script type="module" src="options.js"></script>
+</body>
+</html>
