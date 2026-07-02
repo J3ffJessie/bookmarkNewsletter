@@ -1,0 +1,120 @@
+name: Publish to Chrome Web Store
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read local extension version
+        id: local
+        run: |
+          VERSION=$(jq -r '.version' manifest.json)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Local manifest version: $VERSION"
+
+      - name: Get Chrome Web Store access token
+        id: auth
+        env:
+          CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
+        run: |
+          RESPONSE=$(curl -s -X POST https://oauth2.googleapis.com/token \
+            -d "client_id=${CLIENT_ID}" \
+            -d "client_secret=${CLIENT_SECRET}" \
+            -d "refresh_token=${REFRESH_TOKEN}" \
+            -d "grant_type=refresh_token")
+          ACCESS_TOKEN=$(echo "$RESPONSE" | jq -r '.access_token')
+          if [ "$ACCESS_TOKEN" = "null" ] || [ -z "$ACCESS_TOKEN" ]; then
+            echo "Failed to obtain access token:"
+            echo "$RESPONSE"
+            exit 1
+          fi
+          echo "::add-mask::$ACCESS_TOKEN"
+          echo "token=$ACCESS_TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Get published version
+        id: published
+        env:
+          EXT_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          TOKEN: ${{ steps.auth.outputs.token }}
+        run: |
+          RESPONSE=$(curl -s -X GET \
+            "https://www.googleapis.com/chromewebstore/v1.1/items/${EXT_ID}?projection=DRAFT" \
+            -H "Authorization: Bearer ${TOKEN}" \
+            -H "x-goog-api-version: 2")
+          echo "$RESPONSE"
+          VERSION=$(echo "$RESPONSE" | jq -r '.crxVersion // empty')
+          if [ -z "$VERSION" ]; then
+            echo "Could not determine published version from response above."
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Published version: $VERSION"
+
+      - name: Compare versions
+        id: compare
+        run: |
+          LOCAL="${{ steps.local.outputs.version }}"
+          PUBLISHED="${{ steps.published.outputs.version }}"
+
+          is_greater() {
+            [ "$1" = "$2" ] && return 1
+            higher=$(printf '%s\n%s\n' "$1" "$2" | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -n1)
+            [ "$higher" = "$1" ] && [ "$1" != "$2" ]
+          }
+
+          if is_greater "$LOCAL" "$PUBLISHED"; then
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+            echo "Local version ($LOCAL) is newer than published ($PUBLISHED) - will publish."
+          else
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+            echo "Local version ($LOCAL) is not newer than published ($PUBLISHED) - skipping publish."
+          fi
+
+      - name: Package extension
+        if: steps.compare.outputs.should_publish == 'true'
+        run: |
+          mkdir -p dist
+          zip -r dist/extension.zip manifest.json icons src LICENSE -x '**/.DS_Store'
+
+      - name: Upload new package
+        if: steps.compare.outputs.should_publish == 'true'
+        env:
+          EXT_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          TOKEN: ${{ steps.auth.outputs.token }}
+        run: |
+          RESPONSE=$(curl -s -X PUT \
+            "https://www.googleapis.com/upload/chromewebstore/v1.1/items/${EXT_ID}" \
+            -H "Authorization: Bearer ${TOKEN}" \
+            -H "x-goog-api-version: 2" \
+            -T dist/extension.zip)
+          echo "$RESPONSE"
+          STATE=$(echo "$RESPONSE" | jq -r '.uploadState // empty')
+          if [ "$STATE" != "SUCCESS" ]; then
+            echo "Upload failed."
+            exit 1
+          fi
+
+      - name: Publish new package
+        if: steps.compare.outputs.should_publish == 'true'
+        env:
+          EXT_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          TOKEN: ${{ steps.auth.outputs.token }}
+        run: |
+          RESPONSE=$(curl -s -X POST \
+            "https://www.googleapis.com/chromewebstore/v1.1/items/${EXT_ID}/publish" \
+            -H "Authorization: Bearer ${TOKEN}" \
+            -H "x-goog-api-version: 2" \
+            -H "Content-Length: 0")
+          echo "$RESPONSE"
+          STATUS=$(echo "$RESPONSE" | jq -r '.status[0] // empty')
+          if [ "$STATUS" != "OK" ] && [ "$STATUS" != "ITEM_PENDING_REVIEW" ]; then
+            echo "Publish failed."
+            exit 1
+          fi
