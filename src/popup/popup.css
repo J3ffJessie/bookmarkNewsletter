@@ -6,12 +6,15 @@
 .popup__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .popup__header h1 {
   font-size: 15px;
+}
+
+#openNewsletter {
+  margin-bottom: 12px;
 }
 
 .page-preview {

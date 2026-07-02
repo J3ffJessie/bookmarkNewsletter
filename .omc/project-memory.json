@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1782914441514,
+  "lastScanned": 1783024327106,
   "projectRoot": "c:\\Users\\JeffJ\\Projects\\bookmarkNewsletter",
   "techStack": {
     "languages": [],
@@ -24,46 +24,81 @@
   "structure": {
     "isMonorepo": false,
     "workspaces": [],
-    "mainDirectories": [],
+    "mainDirectories": [
+      "src"
+    ],
     "gitBranches": null
   },
   "customNotes": [],
-  "directoryMap": {},
+  "directoryMap": {
+    "icons": {
+      "path": "icons",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1783024326792,
+      "keyFiles": [
+        "icon128.png",
+        "icon16.png",
+        "icon32.png",
+        "icon48.png"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1783024326794,
+      "keyFiles": []
+    },
+    "store-assets": {
+      "path": "store-assets",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1783024326796,
+      "keyFiles": []
+    }
+  },
   "hotPaths": [
     {
       "path": "README.md",
-      "accessCount": 8,
-      "lastAccessed": 1782921376985,
-      "type": "file"
-    },
-    {
-      "path": "src\\shared\\storage.js",
-      "accessCount": 6,
-      "lastAccessed": 1782920232892,
-      "type": "file"
-    },
-    {
-      "path": "src\\options\\options.js",
-      "accessCount": 6,
-      "lastAccessed": 1782920344109,
-      "type": "file"
-    },
-    {
-      "path": "manifest.json",
-      "accessCount": 5,
-      "lastAccessed": 1782919986981,
-      "type": "file"
-    },
-    {
-      "path": "src\\options\\options.html",
-      "accessCount": 5,
-      "lastAccessed": 1782920322141,
+      "accessCount": 20,
+      "lastAccessed": 1782934538338,
       "type": "file"
     },
     {
       "path": "src\\newsletter\\newsletter.js",
-      "accessCount": 4,
-      "lastAccessed": 1782918014295,
+      "accessCount": 14,
+      "lastAccessed": 1782934492392,
+      "type": "file"
+    },
+    {
+      "path": "src\\options\\options.js",
+      "accessCount": 13,
+      "lastAccessed": 1782933121766,
+      "type": "file"
+    },
+    {
+      "path": "src\\shared\\storage.js",
+      "accessCount": 11,
+      "lastAccessed": 1782932725040,
+      "type": "file"
+    },
+    {
+      "path": "src\\options\\options.html",
+      "accessCount": 9,
+      "lastAccessed": 1782932850175,
+      "type": "file"
+    },
+    {
+      "path": "manifest.json",
+      "accessCount": 9,
+      "lastAccessed": 1783027355219,
+      "type": "file"
+    },
+    {
+      "path": "src\\popup\\popup.html",
+      "accessCount": 5,
+      "lastAccessed": 1782931248726,
       "type": "file"
     },
     {
@@ -73,10 +108,28 @@
       "type": "file"
     },
     {
-      "path": "src\\popup\\popup.html",
-      "accessCount": 3,
-      "lastAccessed": 1782919231346,
+      "path": "src\\popup\\popup.css",
+      "accessCount": 4,
+      "lastAccessed": 1782931284564,
       "type": "file"
+    },
+    {
+      "path": "src\\background\\background.js",
+      "accessCount": 4,
+      "lastAccessed": 1782932742678,
+      "type": "file"
+    },
+    {
+      "path": "src\\newsletter\\newsletter.html",
+      "accessCount": 4,
+      "lastAccessed": 1782934031256,
+      "type": "file"
+    },
+    {
+      "path": "src",
+      "accessCount": 4,
+      "lastAccessed": 1782934544381,
+      "type": "directory"
     },
     {
       "path": "src\\shared\\groq.js",
@@ -85,28 +138,22 @@
       "type": "file"
     },
     {
-      "path": "src\\newsletter\\newsletter.html",
-      "accessCount": 2,
-      "lastAccessed": 1782917976387,
+      "path": "src\\shared\\base.css",
+      "accessCount": 3,
+      "lastAccessed": 1782931259507,
       "type": "file"
-    },
-    {
-      "path": "src\\popup\\popup.css",
-      "accessCount": 2,
-      "lastAccessed": 1782919270033,
-      "type": "file"
-    },
-    {
-      "path": "src",
-      "accessCount": 2,
-      "lastAccessed": 1782919776591,
-      "type": "directory"
     },
     {
       "path": "src\\shared\\bookmarks.js",
       "accessCount": 2,
       "lastAccessed": 1782920222495,
       "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 2,
+      "lastAccessed": 1782934015121,
+      "type": "directory"
     },
     {
       "path": "src\\shared\\claude.js",
@@ -118,12 +165,6 @@
       "path": "src\\shared\\markdown.js",
       "accessCount": 1,
       "lastAccessed": 1782916197709,
-      "type": "file"
-    },
-    {
-      "path": "src\\shared\\base.css",
-      "accessCount": 1,
-      "lastAccessed": 1782916210735,
       "type": "file"
     },
     {
@@ -139,27 +180,33 @@
       "type": "file"
     },
     {
-      "path": "src\\background\\background.js",
-      "accessCount": 1,
-      "lastAccessed": 1782916658202,
-      "type": "file"
-    },
-    {
       "path": "icons\\icon128.png",
       "accessCount": 1,
       "lastAccessed": 1782916851491,
       "type": "file"
     },
     {
-      "path": "",
-      "accessCount": 1,
-      "lastAccessed": 1782918053476,
-      "type": "directory"
-    },
-    {
       "path": "src\\shared\\bookmarkImport.js",
       "accessCount": 1,
       "lastAccessed": 1782918838988,
+      "type": "file"
+    },
+    {
+      "path": "src\\shared\\email.js",
+      "accessCount": 1,
+      "lastAccessed": 1782930725498,
+      "type": "file"
+    },
+    {
+      "path": "src\\shared\\weeklyAlarm.js",
+      "accessCount": 1,
+      "lastAccessed": 1782930777436,
+      "type": "file"
+    },
+    {
+      "path": "src\\shared\\weeklyDigest.js",
+      "accessCount": 1,
+      "lastAccessed": 1782930790828,
       "type": "file"
     }
   ],

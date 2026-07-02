@@ -22,7 +22,6 @@ const preview = document.getElementById("preview");
 const copyBtn = document.getElementById("copyBtn");
 const downloadMdBtn = document.getElementById("downloadMdBtn");
 const downloadHtmlBtn = document.getElementById("downloadHtmlBtn");
-const emailBtn = document.getElementById("emailBtn");
 const archiveList = document.getElementById("archiveList");
 const noArchive = document.getElementById("noArchive");
 
@@ -98,7 +97,7 @@ function setOutput(markdown) {
   preview.innerHTML = hasContent
     ? markdownToHtml(markdown)
     : '<p class="empty-state">Select bookmarks and click "Generate newsletter" to see a preview here.</p>';
-  [copyBtn, downloadMdBtn, downloadHtmlBtn, emailBtn].forEach((btn) => {
+  [copyBtn, downloadMdBtn, downloadHtmlBtn].forEach((btn) => {
     btn.disabled = !hasContent;
   });
 }
@@ -218,12 +217,6 @@ downloadHtmlBtn.addEventListener("click", () => {
     currentMarkdown
   )}</body></html>`;
   downloadFile(`newsletter-${Date.now()}.html`, html, "text/html");
-});
-
-emailBtn.addEventListener("click", () => {
-  const subject = encodeURIComponent("Your Bookmark Newsletter");
-  const body = encodeURIComponent(currentMarkdown);
-  window.location.href = `mailto:?subject=${subject}&body=${body}`;
 });
 
 document.getElementById("openOptions").addEventListener("click", () => {

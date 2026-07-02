@@ -5,7 +5,7 @@ Chrome extension to take bookmarks and then create a newsletter from the bookmar
 - One-click bookmarking from the toolbar popup (title, URL, favicon, optional note/tag, optional auto-extracted page excerpt)
 - Right-click "Add to Newsletter Bookmarks" context menu and a keyboard shortcut (`Ctrl+Shift+S` / `Cmd+Shift+S`) for instant saving
 - Bookmarks stored locally via `chrome.storage.local` — no account or server required
-- Newsletter tab: filter/select bookmarks, generate a Markdown newsletter with the Groq API, preview it, and export (copy, download `.md`/`.html`, or open in your email client)
+- Newsletter tab: filter/select bookmarks, generate a Markdown newsletter with the Groq API, preview it, and export (copy to clipboard or download as `.md`/`.html`)
 - Generated newsletters are archived locally so you can revisit past issues
 - Works in "collector-only" mode with no API key — the key is only needed when you generate a newsletter
 - Settings page for your Groq API key (stored locally, never synced), model, and newsletter tone/length/grouping preferences
@@ -38,7 +38,7 @@ This extension does not operate any server, does not collect analytics, and does
 
 **What's stored, and where.** Bookmarks (title, URL, favicon, your optional note/tag, an auto-extracted excerpt of the page's meta description/visible text, and a timestamp), your Groq API key, your model and newsletter preferences, and any newsletters you generate are all stored locally on your device using Chrome's `chrome.storage.local` — never `chrome.storage.sync`, so none of it is uploaded to Google's servers. Nothing leaves your device except the network request described below.
 
-**What's sent to a third party, and when.** The only outbound data transfer happens when you click "Generate newsletter": the titles, URLs, notes, tags, and excerpts of the bookmarks you selected are sent directly from your browser to Groq's API (`api.groq.com`) using your own Groq API key, for the sole purpose of generating the newsletter text. This request goes straight from your browser to Groq — there is no intermediary server run by the developer of this extension. See [Groq's own privacy policy](https://groq.com/privacy-policy) for how they handle that request. Your API key is never sent anywhere except in that request's authorization header.
+**What's sent to a third party, and when.** The only outbound data transfer happens when you click "Generate newsletter": the titles, URLs, notes, tags, and excerpts of the bookmarks you selected are sent directly from your browser to Groq's API (`api.groq.com`) using your own Groq API key, for the sole purpose of generating the newsletter text. This request goes straight from your browser to Groq — there is no intermediary server run by the developer of this extension. See [Groq's privacy policy](https://groq.com/privacy-policy) for how they handle that request. Your API key is never sent anywhere except in that request's authorization header.
 
 **Why each permission is needed.**
 - `storage` — save your bookmarks, preferences, API key, and newsletter archive locally.
