@@ -16,6 +16,8 @@ const bookmarkCount = document.getElementById("bookmarkCount");
 const emptyState = document.getElementById("emptyState");
 const importChromeBookmarksBtn = document.getElementById("importChromeBookmarks");
 const importStatus = document.getElementById("importStatus");
+const shortcutBanner = document.getElementById("shortcutBanner");
+const setupShortcutBtn = document.getElementById("setupShortcut");
 
 let activeTab = null;
 
@@ -146,8 +148,19 @@ document.getElementById("openOptions").addEventListener("click", () => {
   chrome.runtime.openOptionsPage();
 });
 
+setupShortcutBtn.addEventListener("click", () => {
+  chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+});
+
+async function checkShortcut() {
+  const commands = await chrome.commands.getAll();
+  const saveCommand = commands.find((c) => c.name === "save-current-tab");
+  shortcutBanner.hidden = !saveCommand || !!saveCommand.shortcut;
+}
+
 (async function init() {
   activeTab = await getActiveTab();
   renderTabPreview(activeTab);
   await renderRecent();
+  await checkShortcut();
 })();

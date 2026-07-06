@@ -1,7 +1,7 @@
 {
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"python3 -c \\\"import yaml,sys; yaml.safe_load(open('.github/workflows/publish-chrome-store.yml')); print('YAML OK')\\\" 2>&1 || python -c \\\"import yaml,sys; yaml.safe_load(open('.github/workf...",
-  "error": "Exit code 127\n/usr/bin/bash: line 1: python3: command not found\n/usr/bin/bash: line 1: python: command not found",
-  "timestamp": "2026-07-02T20:38:31.916Z",
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"c:\\\\Users\\\\JeffJ\\\\Projects\\\\bookmarkNewsletter\\\\src\\\\popup\"}",
+  "error": "EISDIR: illegal operation on a directory, read 'c:\\Users\\JeffJ\\Projects\\bookmarkNewsletter\\src\\popup'",
+  "timestamp": "2026-07-06T19:56:07.794Z",
   "retry_count": 1
 }
